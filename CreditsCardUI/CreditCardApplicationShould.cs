@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
+using System;
 using Xunit;
 
 namespace CreditsCardUI
@@ -39,8 +41,12 @@ namespace CreditsCardUI
 				carouselNext.Click();
 				DemoHelper.Pause(1000); //giving the carousel time to load
 
-				IWebElement applylink = driver.FindElement(By.LinkText("Easy: Apply Now!"));
-				applylink.Click(); // clicking on another link
+				WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(1));
+				IWebElement applyLink = wait.Until((d)=>d.FindElement(By.LinkText("Easy: Apply Now!")));
+				applyLink.Click();
+
+				//IWebElement applylink = driver.FindElement(By.LinkText("Easy: Apply Now!"));
+				//applylink.Click(); // clicking on another link
 
 				DemoHelper.Pause();
 
@@ -48,6 +54,27 @@ namespace CreditsCardUI
 				Assert.Equal(ApplyURL, driver.Url);
 			}
 		}
+
+		[Fact]
+		[Obsolete]
+		public void BeInitiatedFromHomePage_EasyApplication_PreBuilt_Coditions()
+		{
+			using (IWebDriver driver = new ChromeDriver())
+			{
+				driver.Navigate().GoToUrl(HomeURL);
+				DemoHelper.Pause();
+
+				WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(11));
+				IWebElement applyLink = 
+					wait.Until(ExpectedConditions.ElementToBeClickable(By.LinkText("Easy: Apply Now!")));
+				applyLink.Click();
+				DemoHelper.Pause();
+
+				Assert.Equal("Credit Card Application - Credit Cards", driver.Title);
+				Assert.Equal(ApplyURL, driver.Url);
+			}
+		}
+
 		[Fact]
 		public void BeInitiatedFromHomePage_CustomerService()
 		{
