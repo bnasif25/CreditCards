@@ -2,7 +2,7 @@
 using Xunit;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-
+using System.Collections.ObjectModel;
 
 namespace CreditsCardUI
 {
@@ -99,6 +99,25 @@ namespace CreditsCardUI
 
 				Assert.Equal(HomeTitle, driver.Title);
 				Assert.Equal(HomeURL, driver.Url);
+			}
+		}
+
+		[Fact]
+
+		public void DisplayProductAndRates()
+		{
+			using (IWebDriver driver = new ChromeDriver())
+			{
+				driver.Navigate().GoToUrl(HomeURL);
+				DemoHelper.Pause();
+
+				ReadOnlyCollection<IWebElement> tableCells = driver.FindElements(By.TagName("td"));
+
+				Assert.Equal("Easy Credit Card", tableCells[0].Text);
+				Assert.Equal("20% APR", tableCells[1].Text);
+
+				Assert.Equal("Silver Credit Card", tableCells[2].Text);
+				Assert.Equal("18% APR", tableCells[3].Text);
 			}
 		}
 		
