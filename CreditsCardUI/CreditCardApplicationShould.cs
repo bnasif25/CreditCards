@@ -116,7 +116,7 @@ namespace CreditsCardUI
 			}
 		}
 		[Fact]
-		public void BeInitiatedFromHomePage_RandomGreeting1()
+		public void BeInitiatedFromHomePage_RandomGreeting_UsingXPATH()
 		{
 			using (IWebDriver driver = new ChromeDriver())
 			{
@@ -131,6 +131,28 @@ namespace CreditsCardUI
 				Assert.Equal("Credit Card Application - Credit Cards", driver.Title);
 				Assert.Equal(ApplyURL, driver.Url);
 			} 
+		}
+		[Fact]
+		public void BeSubmittedWhenValid()
+		{
+			using (IWebDriver driver = new ChromeDriver())
+			{
+				driver.Navigate().GoToUrl(ApplyURL);
+
+				driver.FindElement(By.Id("FirstName")).SendKeys("Sarah");
+				DemoHelper.Pause();
+				driver.FindElement(By.Id("LastName")).SendKeys("Smith");
+				DemoHelper.Pause();
+				driver.FindElement(By.Id("FrequentFlyerNumber")).SendKeys("123456-A");
+				DemoHelper.Pause();
+				driver.FindElement(By.Id("Age")).SendKeys("18");
+				DemoHelper.Pause();
+				driver.FindElement(By.Id("GrossAnnualIncome")).SendKeys("50000");
+				DemoHelper.Pause();
+				driver.FindElement(By.Id("Single")).Click();
+
+				DemoHelper.Pause(5000);
+			}
 		}
 	}
 }
