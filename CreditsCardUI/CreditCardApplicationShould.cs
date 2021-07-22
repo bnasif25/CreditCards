@@ -42,7 +42,7 @@ namespace CreditsCardUI
 				DemoHelper.Pause(1000); //giving the carousel time to load
 
 				WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(1));
-				IWebElement applyLink = wait.Until((d)=>d.FindElement(By.LinkText("Easy: Apply Now!")));
+				IWebElement applyLink = wait.Until((d) => d.FindElement(By.LinkText("Easy: Apply Now!")));
 				applyLink.Click();
 
 				//IWebElement applylink = driver.FindElement(By.LinkText("Easy: Apply Now!"));
@@ -65,7 +65,7 @@ namespace CreditsCardUI
 				DemoHelper.Pause();
 
 				WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(11));
-				IWebElement applyLink = 
+				IWebElement applyLink =
 					wait.Until(ExpectedConditions.ElementToBeClickable(By.LinkText("Easy: Apply Now!")));
 				applyLink.Click();
 				DemoHelper.Pause();
@@ -78,7 +78,7 @@ namespace CreditsCardUI
 		[Fact]
 		public void BeInitiatedFromHomePage_CustomerService()
 		{
-			using(IWebDriver driver = new ChromeDriver())
+			using (IWebDriver driver = new ChromeDriver())
 			{
 				driver.Navigate().GoToUrl(HomeURL);
 				DemoHelper.Pause();
@@ -101,7 +101,7 @@ namespace CreditsCardUI
 		[Fact]
 		public void BeInitiatedFromHomePage_RandomGreeting()
 		{
-			using(IWebDriver driver = new ChromeDriver())
+			using (IWebDriver driver = new ChromeDriver())
 			{
 				driver.Navigate().GoToUrl(HomeURL);
 				DemoHelper.Pause();
@@ -114,6 +114,23 @@ namespace CreditsCardUI
 				Assert.Equal("Credit Card Application - Credit Cards", driver.Title);
 				Assert.Equal(ApplyURL, driver.Url);
 			}
+		}
+		[Fact]
+		public void BeInitiatedFromHomePage_RandomGreeting1()
+		{
+			using (IWebDriver driver = new ChromeDriver())
+			{
+				driver.Navigate().GoToUrl(HomeURL);
+				DemoHelper.Pause();
+
+				IWebElement randomGreetingApplyLink = driver.FindElement(By.PartialLinkText("- Apply Now"));
+				randomGreetingApplyLink.Click();
+
+				DemoHelper.Pause();
+
+				Assert.Equal("Credit Card Application - Credit Cards", driver.Title);
+				Assert.Equal(ApplyURL, driver.Url);
+			} 
 		}
 	}
 }
