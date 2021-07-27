@@ -15,16 +15,32 @@ namespace CreditsCardUI
 		[Fact]
 		[Trait("Category", "Smoke")]
 
-		public void LoadApplicationPage()
+		public void LoadHomePage()
 		{
 			using (IWebDriver driver = new ChromeDriver())
 			{
 				
-
 				driver.Navigate().GoToUrl(HomeURL);
 
+				driver.Manage().Window.Maximise();
 				DemoHelper.Pause();
 
+				driver.Manage().Window.Minimise();
+				DemoHelper.Pause();
+
+				driver.Manage().Window.Size = new System.Drawing.Size(300, 400);
+				DemoHelper.Pause();
+
+				driver.Manage().Window.Size = new System.Drawing.Point(1, 1);
+				DemoHelper.Pause();
+
+				driver.Manage().Window.Size = new System.Drawing.Point(50, 50);
+				DemoHelper.Pause();
+
+				driver.Manage().Window.Size = new System.Drawing.Point(100, 100);
+				DemoHelper.Pause();
+
+				driver.Manage().Window.Fullscreen();
 
 				Assert.Equal(HomeTitle, driver.Title);
 				Assert.Equal(HomeURL, driver.Url);
