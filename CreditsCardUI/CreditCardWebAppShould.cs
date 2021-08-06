@@ -22,10 +22,10 @@ namespace CreditsCardUI
 				
 				driver.Navigate().GoToUrl(HomeURL);
 
-				driver.Manage().Window.Maximise();
+				driver.Manage().Window.Maximize();
 				DemoHelper.Pause();
 
-				driver.Manage().Window.Minimise();
+				driver.Manage().Window.Minimize();
 				DemoHelper.Pause();
 
 				driver.Manage().Window.Size = new System.Drawing.Size(300, 400);
@@ -40,7 +40,7 @@ namespace CreditsCardUI
 				driver.Manage().Window.Size = new System.Drawing.Point(100, 100);
 				DemoHelper.Pause();
 
-				driver.Manage().Window.Fullscreen();
+				driver.Manage().Window.FullScreen();
 
 				Assert.Equal(HomeTitle, driver.Title);
 				Assert.Equal(HomeURL, driver.Url);
