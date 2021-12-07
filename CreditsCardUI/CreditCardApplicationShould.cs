@@ -67,8 +67,7 @@ namespace CreditsCardUI
 				DemoHelper.Pause();
 
 				WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(11));
-				IWebElement applyLink =
-					wait.Until(ExpectedConditions.ElementToBeClickable(By.LinkText("Easy: Apply Now!")));
+				IWebElement applyLink = wait.Until(ExpectedConditions.ElementToBeClickable(By.LinkText("Easy: Apply Now!")));
 				applyLink.Click();
 				DemoHelper.Pause();
 

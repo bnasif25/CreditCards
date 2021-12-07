@@ -12,12 +12,12 @@ namespace CreditsCardUI
 		private const string AboutURL = "http://localhost:44108/Home/About";
 		private const string HomeTitle = "Home Page - Credit Cards";		
 
-		[Fact]
-		[Trait("Category", "Smoke")]
+		[Fact]// used to declare a test method
+		[Trait("Category", "Smoke")] // adding load app to category smoke
 
 		public void LoadHomePage()
 		{
-			using (IWebDriver driver = new ChromeDriver())
+			using (IWebDriver driver = new ChromeDriver()) // declare driver inside to ensure cleanup asfter webdriver use
 			{
 				
 				driver.Navigate().GoToUrl(HomeURL);
@@ -74,7 +74,8 @@ namespace CreditsCardUI
 			using(IWebDriver driver = new ChromeDriver())
 			{
 				driver.Navigate().GoToUrl(HomeURL);
-				IWebElement generationTokenElement = driver.FindElement(By.Id("GenerationToken"));
+
+				IWebElement generationTokenElement = driver.FindElement(By.Id("GenerationToken"));// variable of type iwebelement to find html element id
 
 				string initialToken = generationTokenElement.Text; // string to store captured data
 				DemoHelper.Pause();
@@ -88,7 +89,7 @@ namespace CreditsCardUI
 				Assert.Equal(HomeTitle, driver.Title);
 				Assert.Equal(HomeURL, driver.Url);
 
-				string reloadedToken = driver.FindElement(By.Id("GenerationToken")).Text;
+				string reloadedToken = driver.FindElement(By.Id("GenerationToken")).Text;// to capture reloaded token data
 				Assert.NotEqual(initialToken, reloadedToken);
 			}
 		}
