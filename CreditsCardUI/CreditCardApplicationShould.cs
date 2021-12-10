@@ -64,6 +64,7 @@ namespace CreditsCardUI
 			using (IWebDriver driver = new ChromeDriver())
 			{
 				driver.Navigate().GoToUrl(HomeURL);
+				driver.Manage().Window.Minimize();
 				DemoHelper.Pause();
 
 				WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(11));
@@ -140,7 +141,7 @@ namespace CreditsCardUI
 			{
 				driver.Navigate().GoToUrl(ApplyURL);
 
-				driver.FindElement(By.Id("FirstName")).SendKeys("Sarah");
+				driver.FindElement(By.Id("FirstName")).SendKeys("Sarah"); // the sendkeys method is used to fill forms
 				DemoHelper.Pause();
 				driver.FindElement(By.Id("LastName")).SendKeys("Smith");
 				DemoHelper.Pause();
@@ -159,7 +160,7 @@ namespace CreditsCardUI
 				Assert.Equal("I'd Rather Not Say", businessSource.SelectedOption.Text);
 				// Get all the available options
 
-				//foreach (IWebElement option in businessSource.Options)
+				//foreach (IWebElement option in businessSource.Options)  //this will loop around all elements
 				//{
 				//	Output.WriteLine($"Value: {option.GetAttribute("value")} Text: {option.Text}");
 				//}
@@ -175,7 +176,7 @@ namespace CreditsCardUI
 				driver.FindElement(By.Id("TermsAccepted")).Click(); // selects checkbox
 
 				//driver.FindElement(By.Id("SubmitApplication")).Click();
-				driver.FindElement(By.Id("Single")).Submit();
+				driver.FindElement(By.Id("Single")).Submit();// this will also submit the form
 
 				Assert.StartsWith("Application Complete", driver.Title);
 				Assert.Equal("ReferredToHuman", driver.FindElement(By.Id("Decision")).Text);
@@ -207,8 +208,7 @@ namespace CreditsCardUI
 				driver.FindElement(By.Id("Age")).SendKeys(invalidAge);
 				driver.FindElement(By.Id("GrossAnnualIncome")).SendKeys("50000");
 				driver.FindElement(By.Id("Single")).Click();
-				IWebElement businessSourceSelectElement =
-						driver.FindElement(By.Id("BusinessSource"));
+				IWebElement businessSourceSelectElement = driver.FindElement(By.Id("BusinessSource"));
 				SelectElement businessSource = new SelectElement(businessSourceSelectElement);
 				businessSource.SelectByValue("Email");
 				driver.FindElement(By.Id("TermsAccepted")).Click();
